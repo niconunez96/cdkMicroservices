@@ -1,1 +1,1 @@
-rootProject.name = "checklistApp"
+rootProject.name = "cdkKotlinApp"
