@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  redis:
+    container_name: pysoa_redis
+    image: redis:alpine3.17
+    ports:
+      - "6379:6379"
+  localstack:
+    container_name: localstack
+    image: localstack/localstack:latest
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+      - EDGE_PORT=4566
+    ports:
+      - "4566:4566"
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+  localstack_dynamodbadmin:
+    container_name: localstack_dynamodbadmin
+    image: instructure/dynamo-local-admin
+    networks:
+      - default
+    depends_on:
+      - localstack
+    links:
+      - localstack
+    ports:
+      - "8002:8000"
+    environment:
+      - DYNAMO_ENDPOINT=http://localstack:4566
+volumes:
+  dynamodb-data:
