@@ -34,3 +34,4 @@ Now to run tests you must execute:
 
 Go to localhost:8002
 # cdkKotlinApp
+# cdkKotlinApp
