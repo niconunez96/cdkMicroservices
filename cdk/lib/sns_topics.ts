@@ -2,7 +2,7 @@ import * as sns from 'aws-cdk-lib/aws-sns';
 import * as sqs from 'aws-cdk-lib/aws-sqs';
 import { Construct } from "constructs";
 
-const DOMAIN_TOPICS = ["CampaignSent", "EventPublished"] as const
+const DOMAIN_TOPICS = ["ProfileCompleted"] as const
 type Topic = typeof DOMAIN_TOPICS[number]
 
 export type TopicsWithArn = {
@@ -15,8 +15,7 @@ export class SNSTopicCreator {
     private stackId: string
     private topics: Array<sns.Topic>
     private topicsWithArn: TopicsWithArn = {
-        CampaignSent: "",
-        EventPublished: "",
+        ProfileCompleted: "",
     }
 
     constructor(stack: Construct, stackId: string) {
