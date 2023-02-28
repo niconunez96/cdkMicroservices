@@ -22,6 +22,10 @@ export class CdkStack extends cdk.Stack {
     const domainEventsQueue = new sqs.Queue(this, "DomainEvents", {
       queueName: "DomainEvents",
     })
+
+    const DOMAIN_TOPICS = ["ProfileCompleted"] as const
+    type Topic = typeof DOMAIN_TOPICS[number]
+
     const topicsWithArn = new SNSTopicCreator(this, id)
       .createTopics()
       .subscribeQueueToTopics(domainEventsQueue, "DomainEvents")
