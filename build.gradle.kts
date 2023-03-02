@@ -7,20 +7,12 @@ plugins {
     kotlin("plugin.spring") version "1.6.21"
 }
 
-group = "com.eventbrite"
+group = "com.sample"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
-    maven {
-        name = "eventbrite"
-        url = uri("https://eventbrite-shared-353605023268.d.codeartifact.us-east-1.amazonaws.com/maven/gradle/")
-        credentials {
-            username = "aws"
-            password = System.getenv("CODEARTIFACT_TOKEN")
-        }
-    }
 }
 
 dependencies {
@@ -30,7 +22,6 @@ dependencies {
     implementation("aws.sdk.kotlin:sqs:0.17.8-beta")
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-aws-messaging
     implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
-    implementation("com.eventbrite:pysoa-client-jvm:1.5.0")
     implementation("software.amazon.awssdk:dynamodb-enhanced")
 //    developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
