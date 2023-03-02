@@ -28,7 +28,7 @@ class TestChecklistController {
 
     @Test
     fun `it should return not found when there is no checklist for organization`() {
-        mockMvc.get("/organizations/-1/tasks/")
+        mockMvc.get("/users/-1/tasks/")
             .andExpect {
                 status { isNotFound() }
             }
@@ -36,9 +36,9 @@ class TestChecklistController {
 
     @Test
     fun `it should return checklist that belongs to organization`() {
-        repo.store(UserChecklist("1", publishEvent = Status.COMPLETED, campaignSent = Status.COMPLETED))
+        repo.store(UserChecklist("1",  profileCompleted = Status.COMPLETED))
 
-        mockMvc.get("/organizations/1/tasks/")
+        mockMvc.get("/users/1/tasks/")
             .andExpect {
                 status { isOk() }
                 content {
@@ -46,9 +46,8 @@ class TestChecklistController {
                         mapper.writeValueAsString(
                             mapOf(
                                 "data" to mapOf(
-                                    "organization_id" to "1",
-                                    "publish_event" to Status.COMPLETED,
-                                    "campaign_sent" to Status.COMPLETED
+                                    "userId" to "1",
+                                    "profileCompleted" to Status.COMPLETED,
                                 )
                             )
                         )

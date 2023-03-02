@@ -17,6 +17,7 @@ class UserChecklist(
     val profileCompleted: Status? = null,
 ) {
 
+    @DynamoDbIgnore
     fun completeTask(taskName: TaskName): UserChecklist {
         return when (taskName) {
             TaskName.ProfileCompleted -> UserChecklist(

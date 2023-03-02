@@ -14,7 +14,7 @@ class TestOrganizationChecklistDynamoRepo(repo: UserChecklistDynamoRepo) : Strin
 
     init {
         "it should store organization checklist" {
-            repo.store(UserChecklist("1", publishEvent = Status.COMPLETED))
+            repo.store(UserChecklist("1", profileCompleted = Status.COMPLETED))
             val organization = repo.find("1")
             organization shouldNotBe null
         }

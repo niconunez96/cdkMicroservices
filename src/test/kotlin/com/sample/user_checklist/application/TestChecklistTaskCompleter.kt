@@ -14,24 +14,23 @@ class TestChecklistTaskCompleter : StringSpec({
     "it should complete the specified task" {
         val randomId = UUID.randomUUID().toString()
 
-        checklistTaskCompleter.completeTask(randomId, TaskName.CampaignSent)
+        checklistTaskCompleter.completeTask(randomId, TaskName.ProfileCompleted)
 
         inMemoryRepo.find(randomId)?.toResponse() shouldBe UserChecklist(
             randomId,
-            campaignSent = Status.COMPLETED
+            profileCompleted = Status.COMPLETED
         ).toResponse()
     }
 
     "it should not overwrite completed tasks" {
         val randomId = UUID.randomUUID().toString()
-        inMemoryRepo.store(UserChecklist(randomId, publishEvent = Status.COMPLETED))
+        inMemoryRepo.store(UserChecklist(randomId, profileCompleted = Status.COMPLETED))
 
-        checklistTaskCompleter.completeTask(randomId, TaskName.CampaignSent)
+        checklistTaskCompleter.completeTask(randomId, TaskName.ProfileCompleted)
 
         inMemoryRepo.find(randomId)?.toResponse() shouldBe UserChecklist(
             randomId,
-            campaignSent = Status.COMPLETED,
-            publishEvent = Status.COMPLETED,
+            profileCompleted = Status.COMPLETED,
         ).toResponse()
     }
 })
