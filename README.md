@@ -33,6 +33,3 @@ Now to run tests you must execute:
 ### Dynamodb Admin
 
 Go to localhost:8002
-# cdkKotlinApp
-# cdkKotlinApp
-# cdkKotlinApp
